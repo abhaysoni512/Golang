@@ -26,6 +26,10 @@ func getFunction() func(a int) int {
 	}
 }
 
+func getlanguages() (string,string, bool){
+	return "java","c++",true
+}
+
 func main(){
 	fmt.Println(add(1,2))
 	fmt.Println(add1(1,2))
@@ -42,5 +46,10 @@ func main(){
 	// returning function from another function
 	sqFunc := getFunction()
 	fmt.Println(sqFunc(6))
+	
+	fmt.Println("-------------------")
+	lang1,lang2, _ := getlanguages()        // _ we use this if we dont want to use this values
+	fmt.Println("lang1 : ",lang1," lang2 : ",lang2)
+
 	
 }
