@@ -1,0 +1,55 @@
+// version which we are using in our project
+syntax = "proto3"; // Ensure this line ends with a semicolon
+
+// we define a package namespace for our proto file to prevent naming conflicts
+package coffeeShop;
+
+// go_package option specifies the Go package where the generated code will reside
+option go_package = "github.com/AbhayGo/38_gRPC/coffeeshop_protos";
+
+// we define the CoffeeShop service with its RPC methods
+service CoffeeShop {
+    // RPC method to get menu
+    rpc GetMenu (MenuRequest) returns (stream Menu){}
+    // RPC method to place an order
+    rpc PlaceOrder (Order) returns (OrderConfirmation){}
+    // RPC method to get order status
+    rpc GetOrderStatus (OrderStatusRequest) returns (stream OrderStatus){}
+}
+
+message MenuRequest {
+    // no fields needed for this request
+}
+
+message Order {
+    repeated Item items = 1;
+}
+
+message OrderConfirmation {
+    string confirmationId = 1; // Unique ID for the order confirmation
+    string message = 2;        // Confirmation message
+}
+
+message OrderStatusRequest {
+    string orderId = 1; // ID of the order to check status
+}
+
+message Receipt {
+    string id = 1;
+}
+
+message OrderStatus {
+    string orderId = 1;
+    string status = 2;
+}
+
+message Menu {
+    repeated Item items = 1;
+}
+
+message Item {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    double price = 4;
+}

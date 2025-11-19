@@ -15,7 +15,6 @@ func slowGreet(phrase string,doneChan chan bool) {
 	time.Sleep(3 * time.Second) // simulate a slow, long-taking task
 	fmt.Println("Hello!", phrase)
 	doneChan <- true
-	close(doneChan)
 }
 
 func main() {

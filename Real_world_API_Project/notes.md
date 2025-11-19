@@ -1,0 +1,1 @@
+We will create a student-api that allows users to perform CRUD operations on student records. The API will be built using the Go programming language and will utilize the Gorilla Mux package for routing. The student records will be stored in memory for simplicity.
