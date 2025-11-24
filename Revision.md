@@ -54,3 +54,41 @@
     You can increment the counter using the Add() method before starting a new goroutine and decrement it using the Done() method when a goroutine completes its work.
     The Wait() method blocks the calling goroutine until the counter reaches zero, indicating that all goroutines have finished executing.
     This mechanism helps prevent premature termination of the main program and ensures proper synchronization between concurrent tasks.
+
+6. Composition in Go lang :
+    Composition in Go is a design principle that allows you to build complex types by combining simpler types.
+    In Go, composition is typically achieved by embedding one struct type within another struct type.
+    This allows the outer struct to inherit the fields and methods of the embedded struct, promoting code reuse and modularity.
+
+
+7 Go is object oriented lang ?
+    Go is not a traditional object-oriented programming (OOP) language like Java or C++, but it does support some OOP concepts.
+    Go does not have classes or inheritance, which are fundamental features of traditional OOP languages.
+    Instead, Go uses structs to define custom data types and methods to associate behavior with those types.
+    Go supports encapsulation  through the use of exported and unexported fields and methods, allowing you to control access to the internal state of a struct. exported fields and methods (those that start with an uppercase letter) are accessible from other packages, while unexported ones (those that start with a lowercase letter) are not.
+    Encapsulation helps in bundling the data and methods that operate on that data within a single unit.
+    Polymorphism is achieved in Go through interfaces, which define a set of method signatures that a type must implement to satisfy the interface.
+    Inheritance is not supported in Go, but composition allows you to build complex types by combining simpler types.
+    Abstraction is supported through interfaces, which allow you to define behavior without specifying the underlying implementation.
+    Overall, while Go does not fully embrace traditional OOP principles, it provides enough features to enable developers to use OOP concepts in a way that fits the language's design philosophy.
+
+7. Varadic functions in Go lang :
+    Variadic functions in Go are functions that can accept a variable number of arguments.
+    They are defined by using an ellipsis (...) before the type of the last parameter in the function signature.
+    This allows you to pass zero or more arguments of that type when calling the function.
+    Inside the function, the variadic parameter is treated as a slice of the specified type, allowing you to iterate over the arguments or access them using indexing.
+    Variadic functions are useful when you want to create functions that can handle a flexible number of inputs without requiring the caller to explicitly create a slice or array.
+
+8. Defer vs Panic vs Recover in Go lang :
+    Defer is used halt the execution of underlying function until the surrounding function returns.
+    Panic is used to stop the normal execution of the program when an unexpected error occurs.
+    Recover is used to regain control of a panicking goroutine. It is used inside a deferred function to catch a panic and prevent the program from crashing.
+
+9. Interfaces & Polymorphism in Go lang :
+    An interface in Go defines a set of method signatures that a type must implement to satisfy the interface.
+    Polymorphism is the  ability of a VALUE of certain TYPE to also be another TYPE.
+    In Go, values can be more than one type if they implement multiple interfaces.
+
+10. Closures in Go lang :
+    A closure in Go is a function that captures variables from its surrounding scope and keeps them alive even the scope has finished executing.
+    Closures are created when a function is defined inside another function and references variables from the outer function.

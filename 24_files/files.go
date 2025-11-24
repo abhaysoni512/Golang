@@ -7,21 +7,21 @@ import (
 )
 
 func main() {
-	// f, err := os.Open("24_files/example.txt")
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// defer f.Close()
+	f, err := os.Open("24_files/example.txt")
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
 
-	// FileInfo, err := f.Stat()
-	// if err != nil {
-	// 	panic(err)
-	// }
+	FileInfo, err := f.Stat()
+	if err != nil {
+		panic(err)
+	}
 
-	// fmt.Println("file name : ",FileInfo.Name())
-	// fmt.Println("file size : ",FileInfo.Size())
-	// fmt.Println("file ModTime : ",FileInfo.ModTime())
-	// fmt.Println("file Mode : ",FileInfo.Mode())
+	fmt.Println("file name : ",FileInfo.Name())
+	fmt.Println("file size : ",FileInfo.Size())
+	fmt.Println("file ModTime : ",FileInfo.ModTime())
+	fmt.Println("file Mode : ",FileInfo.Mode())
 
 
 	// Read operation 
@@ -36,7 +36,7 @@ func main() {
 
 	// data, err := os.ReadFile("24_files/example.txt")
 	// if err != nil{
-	// 	panic(err)
+	// 	panic(err)	
 	// }
 	// fmt.Println(string(data))
 
