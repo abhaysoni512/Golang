@@ -3,7 +3,7 @@
     It is an alias for int32 and can represent any character in the Unicode standard.
 
 2. Defer in Go lang :
-    The defer statement in Go is used to ensure that a function call is performed later in a program's execution, usually for purposes of cleanup.
+    The defer statement in Go is used to ensure that a function call is performed later in a program's execution, usually for purposes of cleanup.They are executed after the surrounding function returns, in the reverse order they were deferred.
     Deferred functions are executed in LIFO order just before the surrounding function returns.    
     defer function or method call arguments evaluate instantly, but they don't execute until the nearby functions returns
     Defer statements are generally used to ensure that the files are closed when their need is over, or to close the channel, or to catch the panics in the program.
@@ -31,12 +31,14 @@
         my_slice := make([]int, 5, 10)
 
 4. Go rotuines in Go lang :
-    A goroutine is a lightweight thread of execution in the Go programming language.
-    Goroutines are managed by the Go runtime, which handles their scheduling and execution.
-    They are created using the go keyword followed by a function call.
-    When a goroutine is created, it runs concurrently with other goroutines in the same program.
-    Goroutines communicate with each other using channels, which provide a way to send and receive data between them safely.
-    Goroutines are designed to be lightweight and efficient, allowing developers to create thousands or even millions of them in a single program without incurring significant overhead.
+    A goroutine is a lightweight thread managed by the Go runtime that allows functions (or methods) to run concurrently with other goroutines, all sharing the same memory address space.
+    "in the same address space" :-
+
+    Unlike operating system threads or processes (which often have separate memory spaces), all goroutines in a Go program share the same memory address space.
+        This means:
+        They can directly access the same variables (no need for message passing like in processes).
+        But you must be careful with race conditions → that's why Go gives you channels and sync primitives.
+
 5. Channels in Go lang :
     Channels are a powerful feature in Go that facilitate communication and synchronization between goroutines.
     They provide a way for goroutines to send and receive values of a specified type.
@@ -92,3 +94,18 @@
 10. Closures in Go lang :
     A closure in Go is a function that captures variables from its surrounding scope and keeps them alive even the scope has finished executing.
     Closures are created when a function is defined inside another function and references variables from the outer function.
+
+11. Package atomic
+
+    The atomic package in Go provides low-level atomic memory primitives for synchronizing access to shared variables across multiple goroutines.
+    It offers functions for performing atomic operations on integers and pointers, ensuring that these operations are executed atomically, without interruption.
+    This is crucial for preventing race conditions when multiple goroutines read from and write to the same variable concurrently.
+
+    Difference between sync.Mutex and atomic package:
+    1. Granularity:
+        - sync.Mutex: Provides coarse-grained locking, allowing you to lock and unlock a section of code, which can lead to contention if many goroutines are trying to access the same resource.
+        - atomic package: Offers fine-grained atomic operations on individual variables, reducing contention and improving performance for simple operations.
+    2. Use Cases:
+        - sync.Mutex: Suitable for protecting complex data structures or critical sections of code where multiple operations need to be performed atomically.
+        - atomic package: Ideal for simple operations on single variables, such as incrementing a counter or swapping pointers, where the overhead of a mutex is unnecessary.
+
