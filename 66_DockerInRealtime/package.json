@@ -1,0 +1,18 @@
+{
+  "name": "66_dockerinrealtime",
+  "version": "1.0.0",
+  "description": "In this we will use html,js and nodejs(UI application) -> db(mongodb) (we will use mongoExpress for UI of db) -> backend api (go lang) -> docker compose to run all these services together in realtime.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.18.2",
+    "mongodb": "^4.12.1"
+  }
+}
