@@ -117,30 +117,34 @@
     Fan-Out is a concurrency pattern where multiple worker goroutines read from a single input channel to process data concurrently. This pattern helps to distribute the workload and speed up processing by utilizing multiple goroutines.
 
 12. Context in Go lang :
-    Think of context as a small package that carries:
+    Context in Go is a tool that we can use with concurrent design pattern to make sure that if we have like a process which get lost or cancelled we can propagate that cancellation to all the goroutines which are working on that process.
 
-        Cancellation signals
+    Context could also help us with like passing arround variables which are request scoped like auth tokens, user ids etc.
 
-        Deadlines
+    Real time example : In Go servers, each incoming request is handled in its own goroutine. Request handlers often start additional goroutines to access backends such as databases and RPC services. The set of goroutines working on a request typically needs access to request-specific values such as the identity of the end user, authorization tokens, and the request’s deadline. When a request is canceled or times out, all the goroutines working on that request should exit quickly so the system can reclaim any resources they are using. At Google, we developed a context package that makes it easy to pass request-scoped values, cancellation signals, and deadlines across API boundaries to all the goroutines involved in handling a request. The package is publicly available as context. This article describes how to use the package and provides a complete working example.
 
-        Timeouts
-       
-        extra data (key–value pairs)
+    Request-scoped values (also called request-scoped context or per-request context) are pieces of data that live only for the duration of a single incoming request and are automatically cleaned up when the request ends.
 
-        And this “context object” travels with your function calls.
+    Why "across API boundaries" matters
+    In modern systems (especially microservices or clean/hexagonal architecture), a single incoming HTTP/gRPC request often crosses many boundaries:
 
-        You use context when you’re writing concurrent Go programs — especially with goroutines, HTTP servers, databases, and microservices.
-        
-    Why do we need context?
-        Example:
+    HTTP Request 
+    → API Gateway / Edge service 
+        → Authentication service (internal API call)
+        → User service (another internal call)
+        → Billing service 
+        → Database layers, logging, auditing, etc.
 
-    You make an HTTP request to a server.
+    You usually need certain data available everywhere during that request, for example:
 
-    The user closes the browser.
+        User ID / tenant ID (after authentication)
+        Trace/correlation ID (for distributed tracing)
+        Request locale / timezone
+        Authorization decisions or roles
+        Transaction/context flags (dry-run mode, impersonation, etc.)
+    These mechanisms give you a map/dictionary that:
 
-    The server must stop processing that request — but goroutines don’t know they should stop.
-
-    ➡️ Without context, goroutines become leaked goroutines = memory waste, bad performance.
-
-    ➡️ With context, you can tell goroutines:
-    “Stop your work now, the request is cancelled.”
+        Is automatically created when a request starts
+        Is automatically destroyed when the request finishes
+        Is accessible from anywhere in the call stack (even deep in libraries)
+        Does not leak to other concurrent requests (very important for thread-safety)
